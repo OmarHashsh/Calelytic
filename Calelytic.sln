@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E9BFF77B-5E26-404F-A7C2-C9488D220C12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{23E99FBF-8F70-42F9-BF80-7B31D789DC70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{980B58FF-667D-4EAD-9F50-1687A10528C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calelytic.Core", "Core\Calelytic.Core\Calelytic.Core.csproj", "{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calelytic.API", "API\Calelytic.API\Calelytic.API.csproj", "{D825A711-B77F-443B-A238-13493B67678E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D825A711-B77F-443B-A238-13493B67678E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D825A711-B77F-443B-A238-13493B67678E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D825A711-B77F-443B-A238-13493B67678E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D825A711-B77F-443B-A238-13493B67678E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1} = {E9BFF77B-5E26-404F-A7C2-C9488D220C12}
+		{D825A711-B77F-443B-A238-13493B67678E} = {23E99FBF-8F70-42F9-BF80-7B31D789DC70}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE4996C4-91C9-4A65-B93E-E61E3EC2CB35}
+	EndGlobalSection
+EndGlobal
