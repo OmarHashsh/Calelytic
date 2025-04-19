@@ -10,7 +10,7 @@ namespace Calelytic.Core.DTOs
 {
     public class AccountDTO
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; }
         public string DisplayName { get; set; }
         public string? Email { get; set; }
         public string? GoogleAuthToken { get; set; }
