@@ -9,7 +9,7 @@ namespace Calelytic.Core.Models
 {
     public class Account
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string DisplayName { get; set; } = "User";
         public string? Email { get; set; }// made optional along with the password to allow the user to login with google
         public string? PasswordHash { get; set; } 
@@ -18,7 +18,11 @@ namespace Calelytic.Core.Models
         public List<Calendar>? Calendars { get; set; }
         public List<Event>? Events { get; set; }
         public List<DeletedEvent>? DeletedEvents { get; set; }
-        
+
+        //Logging vars
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
+        public Guid UpdatedBy { get; set; }
         public Account()
         {
             Email = "N/a";
