@@ -8,22 +8,14 @@ using Calelytic.Core.Models;
 
 namespace Calelytic.Core.Interfaces
 {
-        public interface IAccountServices
-        {
-            // Authentication
-            Task<Account> RegisterAsync(AccountDTO accountDto);
-            Task<Account> LoginAsync(string email, string password);
-            Task<Account> LoginWithGoogleAsync(string googleToken);
+    public interface IAccountServices
+    {
+        Task<bool> DoesAccountExist(Guid accountId);
+        Task<Account> CreateAccount(AccountDTO dto);
+        Task<Guid?> FetchAccDataByEmail(string email);
+        Task<bool> ModifyAccount(Guid id, AccountDTO newData);
+        Task<bool> SoftDeleteByGuid(Guid Id);
 
-            // Profile Management
-            Task UpdateDisplayNameAsync(int accountId, string displayName);
-            Task UpdateTimeZoneAsync(int accountId, string timeZone);
-            Task DeleteAccountAsync(int accountId);
+    }
 
-            // Social Features
-            Task AddFriendAsync(int accountId, int friendAccountId);
-            Task RemoveFriendAsync(int accountId, int friendAccountId);
-            Task<List<Friend>> GetFriendsListAsync(int accountId);
-        }
-    
 }
