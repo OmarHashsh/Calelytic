@@ -29,7 +29,7 @@ namespace Calelytic.Core.Services
         // Does account exist?
         public async Task<bool> DoesAccountExist(Guid accountId)
         {
-            bool exists = await _context.Accounts.AnyAsync(a => a.Id == accountId);
+            bool exists = await _context.Account.AnyAsync(a => a.Id == accountId);
             return exists;
         }
 
@@ -45,7 +45,7 @@ namespace Calelytic.Core.Services
 
             };
 
-            _context.Accounts.Add(account);
+            _context.Account.Add(account);
             await _context.SaveChangesAsync();
             return account;
         }
@@ -55,7 +55,7 @@ namespace Calelytic.Core.Services
         // *1 *2
         public async Task<Guid?> FetchAccDataByEmail(string email)
         {
-            var accountId = await _context.Accounts
+            var accountId = await _context.Account
                 .Where(a => a.Email == email)
                 .Select(a => a.Id)
                 .FirstOrDefaultAsync();
@@ -65,7 +65,7 @@ namespace Calelytic.Core.Services
         // *1
         public async Task<bool> ModifyAccount(Guid id, AccountDTO newData)
         {
-            var dataInDB = await _context.Accounts.FindAsync(id);
+            var dataInDB = await _context.Account.FindAsync(id);
             if (dataInDB == null)
                 return false;
 
@@ -99,7 +99,7 @@ namespace Calelytic.Core.Services
         // *1
         public async Task<bool> SoftDeleteByGuid(Guid Id)
         {
-            var account = await _context.Accounts.FindAsync(Id);
+            var account = await _context.Account.FindAsync(Id);
             if (account == null)
                 return false;
 
