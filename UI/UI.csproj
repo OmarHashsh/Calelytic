@@ -62,4 +62,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\API\Calelytic.API\Calelytic.API.csproj" />
+	  <ProjectReference Include="..\Core\Calelytic.Core\Calelytic.Core.csproj" />
+	</ItemGroup>
+
 </Project>
