@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calelytic.Core", "Core\Cale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calelytic.API", "API\Calelytic.API\Calelytic.API.csproj", "{D825A711-B77F-443B-A238-13493B67678E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{C9D983FF-BF69-4B26-93A3-C3E48D651955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{D825A711-B77F-443B-A238-13493B67678E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D825A711-B77F-443B-A238-13493B67678E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D825A711-B77F-443B-A238-13493B67678E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8FDF64A1-86FB-424C-84B5-BC67BBDFD4C1} = {E9BFF77B-5E26-404F-A7C2-C9488D220C12}
 		{D825A711-B77F-443B-A238-13493B67678E} = {23E99FBF-8F70-42F9-BF80-7B31D789DC70}
+		{C9D983FF-BF69-4B26-93A3-C3E48D651955} = {980B58FF-667D-4EAD-9F50-1687A10528C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE4996C4-91C9-4A65-B93E-E61E3EC2CB35}
