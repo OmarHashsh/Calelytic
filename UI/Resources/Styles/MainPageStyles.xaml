@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="UI.Resources.Styles.MainPageStyles">
+
+    <!-- Month grid -->
+    <Style x:Key="month-grid" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="#ffffff" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
+    <!-- Month label -->
+    <Style x:Key="month-label" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="#495057" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10" />
+    </Style>
+
+    <!-- Calendar grid -->
+    <Style x:Key="calendar-grid" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="#dee2e6" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="RowSpacing" Value="5" />
+        <Setter Property="ColumnSpacing" Value="1" />
+    </Style>
+
+    <!-- Day frame -->
+    <Style x:Key="day" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#ffffff" />
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="HeightRequest" Value="80" />
+    </Style>
+
+    <!-- Day number label -->
+    <Style x:Key="day-number" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#495057" />
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+    </Style>
+
+    <!-- Other month -->
+    <Style x:Key="other-month" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#f8f9fa" />
+    </Style>
+
+    <Style x:Key="other-month-label" TargetType="Label">
+        <Setter Property="TextColor" Value="#adb5bd" />
+    </Style>
+
+    <!-- Today -->
+    <Style x:Key="today" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#e7f5ff" />
+    </Style>
+
+    <Style x:Key="today-label" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Calendar navigation buttons -->
+    <Style TargetType="Button">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="#495057" />
+    </Style>
+
+    <!-- Weekday labels -->
+    <Style x:Key="weekday" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="#e9ecef" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="TextColor" Value="#495057" />
+    </Style>
+
+</ResourceDictionary>

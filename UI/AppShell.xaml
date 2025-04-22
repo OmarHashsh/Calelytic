@@ -5,11 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UI"
     Shell.FlyoutBehavior="Disabled"
-    Title="UI">
+    Title="">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:CalendarPage}"
         Route="MainPage" />
 
 </Shell>
