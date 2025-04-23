@@ -8,7 +8,15 @@
     <!-- Month grid -->
     <Style x:Key="month-grid" TargetType="Grid">
         <Setter Property="BackgroundColor" Value="#ffffff" />
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <!-- Month grid border -->
+    <Style x:Key="month-grid-border" TargetType="Border">
+        <Setter Property="Stroke" Value="#e9ecef" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 15" />
     </Style>
 
     <!-- Month label -->
@@ -16,57 +24,87 @@
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="#495057" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="TextColor" Value="#2b2d42" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="Padding" Value="0,0,10,0" />
     </Style>
 
     <!-- Calendar grid -->
     <Style x:Key="calendar-grid" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="#dee2e6" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="BackgroundColor" Value="#f8f9fa" />
+        <Setter Property="Padding" Value="15" />
         <Setter Property="RowSpacing" Value="5" />
-        <Setter Property="ColumnSpacing" Value="1" />
+        <Setter Property="ColumnSpacing" Value="5" />
     </Style>
 
-    <!-- Day frame -->
-    <Style x:Key="day" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#ffffff" />
-        <Setter Property="Margin" Value="12" />
-        <Setter Property="HeightRequest" Value="80" />
+    <!-- Calendar grid border -->
+    <Style x:Key="calendar-grid-border" TargetType="Border">
+        <Setter Property="Stroke" Value="#e9ecef" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
     </Style>
+
+    <!-- Day Border -->
+    <Style x:Key="dayBorder" TargetType="Border">
+        <Setter Property="Stroke" Value="#e9ecef" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+    </Style>
+    <!-- Day frame -->
+    <Style x:Key="day" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="#ffffff" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Stroke" Value="#e9ecef" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+    </Style>
+
+        
 
     <!-- Day number label -->
     <Style x:Key="day-number" TargetType="Label">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#495057" />
+        <Setter Property="TextColor" Value="#2b2d42" />
         <Setter Property="HorizontalTextAlignment" Value="End" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="Margin" Value="4,4,4,0" />
     </Style>
 
     <!-- Other month -->
-    <Style x:Key="other-month" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#f8f9fa" />
+    <Style x:Key="other-month" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="#f1f3f5" />
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="Stroke" Value="#e9ecef" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
     </Style>
 
     <Style x:Key="other-month-label" TargetType="Label">
-        <Setter Property="TextColor" Value="#adb5bd" />
+        <Setter Property="TextColor" Value="#868e96" />
     </Style>
 
     <!-- Today -->
-    <Style x:Key="today" TargetType="Frame">
+    <Style x:Key="today" TargetType="Border">
         <Setter Property="BackgroundColor" Value="#e7f5ff" />
+        <Setter Property="Stroke" Value="#4dabf7" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
     </Style>
 
     <Style x:Key="today-label" TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="#1971c2" />
     </Style>
 
     <!-- Calendar navigation buttons -->
     <Style x:Key="CalendarNavButt" TargetType="Button">
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="28" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="BorderColor" Value="Transparent" />
-        <Setter Property="TextColor" Value="#495057" />
+        <Setter Property="TextColor" Value="#2b2d42" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
     </Style>
 
     <!-- Weekday labels -->
@@ -75,8 +113,15 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="BackgroundColor" Value="#e9ecef" />
-        <Setter Property="Padding" Value="8" />
+        <Setter Property="Padding" Value="10" />
         <Setter Property="TextColor" Value="#495057" />
+    </Style>
+
+    <!-- Weekday border -->
+    <Style x:Key="weekday-border" TargetType="Border">
+        <Setter Property="Stroke" Value="#dee2e6" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
     </Style>
 
 </ResourceDictionary>

@@ -4,8 +4,6 @@
     {
         private DateTime today = DateTime.Today; // checks if today is today
         private DateTime currentDate = DateTime.Today;// tracks the currently visible month
-        private Dictionary<string, Grid> loadedMonths = new(); // string = what month it is . Grid is a reference to the grid that's going to hold the month data
-        private const int monthsToKeep = 12;
         private bool isAnimating = false;
 
 
@@ -18,68 +16,71 @@
 
         private void InitializeCalendar()
         {
-            for (int i = -6; i <= 6; i++)
-            {
-                var date = currentDate.AddMonths(i);
-                CreateMonth(date);
-            }
-            ShowCurrentMonth();
+            CreateMonth(currentDate);
         }
 
         private void CreateMonth(DateTime date)
         {
+            // Clear existing days except weekday headers
+            for (int i = MonthsContainer.Children.Count - 1; i >= 7; i--)
+            {
+                MonthsContainer.Children.RemoveAt(i);
+            }
+
             var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
             var daysInMonth = DateTime.DaysInMonth(date.Year, date.Month);
             int startOffset = (int)firstDayOfMonth.DayOfWeek;
 
-            // Start from Sunday (0) to Saturday (6)
+            // Calculate total days to show (including previous and next month days)
+            int totalDays = 42; // 6 weeks * 7 days
             DateTime startDate = firstDayOfMonth.AddDays(-startOffset);
 
-            foreach (HorizontalStackLayout ContainerChild in MonthsContainer)
+            // Create day frames
+            for (int i = 0; i < totalDays; i++)
             {
-                foreach (Frame frame in ContainerChild)
+                DateTime currentDay = startDate.AddDays(i);
+                int row = (i / 7) + 1; // +1 to account for weekday headers
+                int col = i % 7;
+
+                var border = new Border
                 {
-                    DateTime currentDay = startDate.AddDays(i);
+                    Style = (Style)Application.Current.Resources["dayBorder"]
+                };
 
-                    if (frame == null) continue;
+                var frame = new Frame
+                {
+                    Style = (Style)Application.Current.Resources["dayFrame"]
+                };
 
-                    // Assume label is first child of the frame
-                    if (frame.Content is Label label)
-                    {
-                        label.Text = currentDay.Day.ToString();
+                var label = new Label
+                {
+                    Style = (Style)Application.Current.Resources["day-number"],
+                    Text = currentDay.Day.ToString()
+                };
 
-                        // Reset all styles
-                        frame.StyleClass = new List<string> { "day" };
-
-                        if (currentDay.Month != date.Month)
-                            frame.StyleClass.Add("other-month");
-
-                        if (currentDay.Date == today)
-                            frame.StyleClass.Add("today");
-                    }
+                // Set styles based on day type
+                if (currentDay.Month != date.Month)
+                {
+                    border.StyleClass = new List<string> { "other-month" };
+                    //frame.StyleClass = new List<string> { "other-month" };
+                    label.StyleClass = new List<string> { "other-month-label" };
+                }
+                else if (currentDay.Date == today)
+                {
+                    border.StyleClass = new List<string> { "today" };
+                    frame.StyleClass = new List<string> { "today" };
+                    label.StyleClass = new List<string> { "today-label" };
                 }
 
+                frame.Content = label;
+                border.Content = frame;
+                MonthsContainer.Children.Add(border);
+                Grid.SetRow(border, row);
+                Grid.SetColumn(border, col);
             }
 
-                currentDate = date;
-                CurrentMonthYear.Text = date.ToString("MMMM yyyy");
-            }
-
-
-        private void ShowCurrentMonth()
-        {
-            string key = GetMonthKey(currentDate);
-
-            foreach (var month in loadedMonths.Values)
-            {
-                month.IsVisible = false;
-            }
-
-            if (loadedMonths.TryGetValue(key, out var currentMonth))
-            {
-                currentMonth.IsVisible = true;
-                CurrentMonthYear.Text = currentDate.ToString("MMMM yyyy");
-            }
+            currentDate = date;
+            CurrentMonthYear.Text = date.ToString("MMMM yyyy");
         }
 
         private void SetupEventListeners()
@@ -96,12 +97,11 @@
             var newDate = direction == "next" ? currentDate.AddMonths(1) : currentDate.AddMonths(-1);
             int directionMultiplier = direction == "next" ? -1 : 1;
 
-
             await AnimateOutLabels(directionMultiplier);
-            CreateMonth(newDate); // swaps label data
+            CreateMonth(newDate);
             await AnimateInLabels(-directionMultiplier);
 
-            await Task.Delay(100); // slight pause after animation
+            await Task.Delay(100);
             isAnimating = false;
         }
 
@@ -109,15 +109,17 @@
         {
             var tasks = new List<Task>();
 
-            foreach (var child in MonthsContainer.Children)
+            // Animate all day frames
+            for (int i = 7; i < MonthsContainer.Children.Count; i++)
             {
-                if (child is Frame frame && frame.Content is Label label)
+                if (MonthsContainer.Children[i] is Frame frame && frame.Content is Label label)
                 {
                     var translateTask = label.TranslateTo(100 * directionMultiplier, 0, 200, Easing.SinOut);
                     var fadeTask = label.FadeTo(0, 100, Easing.SinOut);
                     tasks.Add(Task.WhenAll(translateTask, fadeTask));
                 }
             }
+
             tasks.Add(CurrentMonthYear.TranslateTo(100 * directionMultiplier, 0, 200, Easing.SinOut));
             tasks.Add(CurrentMonthYear.FadeTo(0, 200, Easing.SinOut));
 
@@ -128,9 +130,10 @@
         {
             var tasks = new List<Task>();
 
-            foreach (var child in MonthsContainer.Children)
+            // Animate all day frames
+            for (int i = 7; i < MonthsContainer.Children.Count; i++)
             {
-                if (child is Frame frame && frame.Content is Label label)
+                if (MonthsContainer.Children[i] is Frame frame && frame.Content is Label label)
                 {
                     label.TranslationX = 100 * directionMultiplier;
                     label.Opacity = 0;
@@ -139,6 +142,7 @@
                     tasks.Add(Task.WhenAll(translateTask, fadeTask));
                 }
             }
+
             CurrentMonthYear.TranslationX = 100 * directionMultiplier;
             CurrentMonthYear.Opacity = 0;
             tasks.Add(CurrentMonthYear.TranslateTo(0, 0, 200, Easing.SinIn));
@@ -148,6 +152,20 @@
         }
 
         private string GetMonthKey(DateTime date) => $"{date.Year}-{date.Month}";
+
+        private void OnLayoutSizeChanged(object sender, EventArgs e)
+        {
+            if (sender is VerticalStackLayout layout)
+            {
+                // Get the parent ScrollView
+                if (layout.Parent is ScrollView scrollView)
+                {
+                    // Set the minimum size to prevent shrinking
+                    layout.MinimumHeightRequest = layout.Height;
+                    layout.MinimumWidthRequest = layout.Width;
+                }
+            }
+        }
     }
 }
 

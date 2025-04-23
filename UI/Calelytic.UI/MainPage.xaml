@@ -3,159 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Calelytic.UI.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout >
+    <Grid ColumnDefinitions="0.175*,0.45*">
+        <!-- Left quarter is empty as requested -->
+        
+        <!-- Calendar Section -->
+        <ScrollView Grid.Column="1" 
+                    Orientation="Both"
+                    HorizontalScrollBarVisibility="Always"
+                    VerticalScrollBarVisibility="Always">
+            <VerticalStackLayout Spacing="20" Margin="0,0,20,0" SizeChanged="OnLayoutSizeChanged">
+                <!-- Header -->
+                <Border Style="{StaticResource month-grid-border}">
+                    <Grid Style="{StaticResource month-grid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-            <!-- Header -->
+                        <Button x:Name="PrevMonth" 
+                                Text="&lt;" 
+                                Style="{StaticResource CalendarNavButt}"
+                                Grid.Column="0"/>
 
-            <HorizontalStackLayout Style="{StaticResource month-grid}" StyleClass="">
-                <Button x:Name="PrevMonth" Text="&lt;" Style="{StaticResource CalendarNavButt}" />
-                <Label  x:Name="CurrentMonthYear" Style="{StaticResource month-label}"/>
-                <Button x:Name="NextMonth" Text="&gt;" Style="{StaticResource CalendarNavButt}" />
-            </HorizontalStackLayout>
+                        <Label x:Name="CurrentMonthYear" 
+                               Style="{StaticResource month-label}"
+                               Grid.Column="1"/>
 
-            <!-- Weekdays -->
-            <Grid x:Name="MonthsContainer" StyleClass="month-container" Style="{StaticResource calendar-grid}"
-                  ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource calendar-grid}">
-                    <Label Style="{StaticResource weekday}" Grid.Column="0" Text="Sun" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="1" Text="Mon" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="2" Text="Tue" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="3" Text="Wed" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="4" Text="Thu" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="5" Text="Fri" HorizontalOptions="Center" />
-                    <Label Style="{StaticResource weekday}" Grid.Column="6" Text="Sat" HorizontalOptions="Center" />
-                </HorizontalStackLayout>
-                
-                <HorizontalStackLayout Grid.Row="1">
-                    <Frame  Grid.Column="0" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">1</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="1" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">2</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="2" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">3</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="3" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">4</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="4" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">5</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="5" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">6</Label>
-                    </Frame>
-                    
-                    <Frame  Grid.Column="6" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">7</Label>
-                    </Frame>
-                    
-                </HorizontalStackLayout>
-                
-                <HorizontalStackLayout Grid.Row="2">
-                    <Frame Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">8</Label>
-                    </Frame>
-                    
-                    <Frame Grid.Row="2" Grid.Column="1" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">9</Label>
-                    </Frame>
-                    
-                    <Frame Grid.Row="2" Grid.Column="2" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">10</Label>
-                    </Frame>
-                    
-                    <Frame Grid.Row="2" Grid.Column="3" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">11</Label>
-                    </Frame>
-                    
-                    <Frame Grid.Row="2" Grid.Column="4" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">12</Label>
-                    </Frame>
-                    
-                    <Frame Grid.Row="2" Grid.Column="5" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">13</Label>
-                    </Frame>
+                        <Button x:Name="NextMonth" 
+                                Text="&gt;" 
+                                Style="{StaticResource CalendarNavButt}"
+                                Grid.Column="2"/>
+                    </Grid>
+                </Border>
 
-                    <Frame Grid.Row="2" Grid.Column="6" HorizontalOptions="Center">
-                        <Label Style="{StaticResource day-number}">14</Label>
-                    </Frame>
-
-                </HorizontalStackLayout>
-                
-                
-                <Frame Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">15</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="1" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">16</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="2" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">17</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="3" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">18</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="4" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">19</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="5" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">20</Label>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="6" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">21</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="0" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">22</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="1" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">23</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="2" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">24</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="3" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">25</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="4" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">26</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="5" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">27</Label>
-                </Frame>
-                <Frame Grid.Row="4" Grid.Column="6" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">28</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="0" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">29</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="1" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">30</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="2" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">31</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="3" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">1</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="4" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">2</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="5" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">3</Label>
-                </Frame>
-                <Frame Grid.Row="5" Grid.Column="6" HorizontalOptions="Center">
-                    <Label Style="{StaticResource day-number}">4</Label>
-                </Frame>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+                <!-- Calendar Grid -->
+                <Border Style="{StaticResource calendar-grid-border}">
+                    <Grid x:Name="MonthsContainer" 
+                          Style="{StaticResource calendar-grid}"
+                          ColumnDefinitions="*,*,*,*,*,*,*"
+                          RowDefinitions="Auto,*,*,*,*,*,*">
+                          
+                        <!-- Weekday Headers -->
+                        <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource weekday-border}">
+                            <Label Text="Sun" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource weekday-border}">
+                            <Label Text="Mon" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource weekday-border}">
+                            <Label Text="Tue" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource weekday-border}">
+                            <Label Text="Wed" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource weekday-border}">
+                            <Label Text="Thu" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="5" Style="{StaticResource weekday-border}">
+                            <Label Text="Fri" Style="{StaticResource weekday}"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="6" Style="{StaticResource weekday-border}">
+                            <Label Text="Sat" Style="{StaticResource weekday}"/>
+                        </Border>
+                        
+                        <!-- Days will be dynamically added here -->
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>
