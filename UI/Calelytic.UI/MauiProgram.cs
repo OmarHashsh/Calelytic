@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace UI
+namespace Calelytic.UI
 {
     public static class MauiProgram
     {

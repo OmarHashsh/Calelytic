@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calelytic.UI.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout >
+
+            <!-- Header -->
+
+            <HorizontalStackLayout Style="{StaticResource month-grid}" StyleClass="">
+                <Button x:Name="PrevMonth" Text="&lt;" Style="{StaticResource CalendarNavButt}" />
+                <Label  x:Name="CurrentMonthYear" Style="{StaticResource month-label}"/>
+                <Button x:Name="NextMonth" Text="&gt;" Style="{StaticResource CalendarNavButt}" />
+            </HorizontalStackLayout>
+
+            <!-- Weekdays -->
+            <Grid x:Name="MonthsContainer" StyleClass="month-container" Style="{StaticResource calendar-grid}"
+                  ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource calendar-grid}">
+                    <Label Style="{StaticResource weekday}" Grid.Column="0" Text="Sun" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="1" Text="Mon" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="2" Text="Tue" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="3" Text="Wed" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="4" Text="Thu" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="5" Text="Fri" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource weekday}" Grid.Column="6" Text="Sat" HorizontalOptions="Center" />
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout Grid.Row="1">
+                    <Frame  Grid.Column="0" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">1</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="1" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">2</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="2" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">3</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="3" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">4</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="4" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">5</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="5" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">6</Label>
+                    </Frame>
+                    
+                    <Frame  Grid.Column="6" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">7</Label>
+                    </Frame>
+                    
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout Grid.Row="2">
+                    <Frame Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">8</Label>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="1" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">9</Label>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="2" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">10</Label>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="3" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">11</Label>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="4" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">12</Label>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="5" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">13</Label>
+                    </Frame>
+
+                    <Frame Grid.Row="2" Grid.Column="6" HorizontalOptions="Center">
+                        <Label Style="{StaticResource day-number}">14</Label>
+                    </Frame>
+
+                </HorizontalStackLayout>
+                
+                
+                <Frame Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">15</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="1" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">16</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="2" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">17</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="3" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">18</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="4" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">19</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="5" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">20</Label>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="6" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">21</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="0" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">22</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="1" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">23</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="2" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">24</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="3" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">25</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="4" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">26</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="5" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">27</Label>
+                </Frame>
+                <Frame Grid.Row="4" Grid.Column="6" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">28</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="0" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">29</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="1" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">30</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="2" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">31</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="3" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">1</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="4" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">2</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="5" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">3</Label>
+                </Frame>
+                <Frame Grid.Row="5" Grid.Column="6" HorizontalOptions="Center">
+                    <Label Style="{StaticResource day-number}">4</Label>
+                </Frame>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

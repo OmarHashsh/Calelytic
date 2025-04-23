@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace UI
+namespace Calelytic.UI
 {
     public class Program
     {

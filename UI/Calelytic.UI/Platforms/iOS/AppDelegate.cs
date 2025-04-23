@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace UI
+namespace Calelytic.UI
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

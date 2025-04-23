@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿namespace Calelytic.UI
 {
     public partial class AppShell : Shell
     {
