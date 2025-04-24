@@ -49,7 +49,7 @@
 
                 var frame = new Frame
                 {
-                    Style = (Style)Application.Current.Resources["dayFrame"]
+                    Style = (Style)Application.Current.Resources["day"]
                 };
 
                 var label = new Label
