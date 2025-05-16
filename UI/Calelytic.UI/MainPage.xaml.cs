@@ -1,11 +1,13 @@
-﻿namespace Calelytic.UI
+﻿using Microsoft.Maui.Controls;
+using CommunityToolkit.Maui.Behaviors;
+namespace Calelytic.UI
 {
     public partial class MainPage : ContentPage
     {
-        private DateTime today = DateTime.Today; // checks if today is today
+        private DateTime today = DateTime.Today; // checks if the day we're examining is today
         private DateTime currentDate = DateTime.Today;// tracks the currently visible month
         private bool isAnimating = false;
-
+        private Dictionary<ContentView, DateTime> frameDates = new Dictionary<ContentView, DateTime>();
 
         public MainPage()
         {
@@ -47,33 +49,55 @@
                     Style = (Style)Application.Current.Resources["dayBorder"]
                 };
 
-                var frame = new Frame
+                var contentView = new ContentView
                 {
                     Style = (Style)Application.Current.Resources["day"]
                 };
 
-                var label = new Label
+                // Store the date associated with this contentView
+                frameDates[contentView] = currentDay;
+
+                var dayNumberLabel = new Label
                 {
                     Style = (Style)Application.Current.Resources["day-number"],
                     Text = currentDay.Day.ToString()
                 };
 
+                var eventLabel = new Label
+                {
+                    Style = (Style)Application.Current.Resources["event-label"],
+                    Text = "Demo Body of text asjdkhasd"
+                };
+
+                var contentGrid = new Grid
+                {
+                    RowDefinitions = new RowDefinitionCollection
+                    {
+                        new RowDefinition { Height = GridLength.Auto },
+                        new RowDefinition { Height = GridLength.Star }
+                    }
+                };
+
+                contentGrid.Children.Add(dayNumberLabel);
+                contentGrid.Children.Add(eventLabel);
+                Grid.SetRow(eventLabel, 1);
+
                 // Set styles based on day type
                 if (currentDay.Month != date.Month)
                 {
-                    border.StyleClass = new List<string> { "other-month" };
-                    //frame.StyleClass = new List<string> { "other-month" };
-                    label.StyleClass = new List<string> { "other-month-label" };
+                    border.Style = (Style)Application.Current.Resources["other-month"];
+                    dayNumberLabel.Style = (Style)Application.Current.Resources["other-month-label"];
+                    eventLabel.Style = (Style)Application.Current.Resources["other-month-label"];
                 }
-                else if (currentDay.Date == today)
+                if (currentDay.Date == today.Date)
                 {
-                    border.StyleClass = new List<string> { "today" };
-                    frame.StyleClass = new List<string> { "today" };
-                    label.StyleClass = new List<string> { "today-label" };
+                    border.Style = (Style)Application.Current.Resources["today"];
+                    dayNumberLabel.Style = (Style)Application.Current.Resources["today-label"];
+                    eventLabel.Style = (Style)Application.Current.Resources["event-label"];
                 }
 
-                frame.Content = label;
-                border.Content = frame;
+                contentView.Content = contentGrid;
+                border.Content = contentView;
                 MonthsContainer.Children.Add(border);
                 Grid.SetRow(border, row);
                 Grid.SetColumn(border, col);
@@ -87,7 +111,52 @@
         {
             PrevMonth.Clicked += async (s, e) => await Navigate("prev");
             NextMonth.Clicked += async (s, e) => await Navigate("next");
+
+            // Add hover effect handlers
+            foreach (var child in MonthsContainer.Children)
+            {
+                if (child is Border border && border.Content is ContentView contentView)
+                {
+                    // TODO: Replace the animation logic below with a popup logic on release. 
+                    TapGestureRecognizer tapGesture = new TapGestureRecognizer();
+                    tapGesture.Tapped += (s, e) =>
+                    {
+                        if (frameDates.TryGetValue(contentView, out DateTime date))
+                        {
+                            contentView.Style = (Style)Application.Current.Resources["day-hover"];
+                            // Reset style after a short delay
+                            Task.Delay(200).ContinueWith(_ =>
+                            {
+                                MainThread.BeginInvokeOnMainThread(() =>
+                                {
+                                    contentView.Style = (Style)Application.Current.Resources["day"];
+                                });
+                            });
+                        }
+                    };
+
+                    // Add pointer gesture for hover effect
+                    var pointerGesture = new PointerGestureRecognizer();
+                    pointerGesture.PointerEntered += (s, e) =>
+                    {
+                        if (frameDates.TryGetValue(contentView, out DateTime date))
+                        {
+                            // Apply hover style
+                            contentView.Style = (Style)Application.Current.Resources["day-hover"];
+                        }
+                    };
+                    pointerGesture.PointerExited += (s, e) =>
+                    {
+                        // Revert to normal style
+                        contentView.Style = (Style)Application.Current.Resources["day"];
+                    };
+
+                    contentView.GestureRecognizers.Add(tapGesture);
+                    contentView.GestureRecognizers.Add(pointerGesture);
+                }
+            }
         }
+        
 
         private async Task Navigate(string direction)
         {
@@ -99,6 +168,7 @@
 
             await AnimateOutLabels(directionMultiplier);
             CreateMonth(newDate);
+            SetupEventListeners(); // Reattach event listeners to new month's elements
             await AnimateInLabels(-directionMultiplier);
 
             await Task.Delay(100);
@@ -112,10 +182,10 @@
             // Animate all day frames
             for (int i = 7; i < MonthsContainer.Children.Count; i++)
             {
-                if (MonthsContainer.Children[i] is Frame frame && frame.Content is Label label)
+                if (MonthsContainer.Children[i] is Border border && border.Content is ContentView contentView)
                 {
-                    var translateTask = label.TranslateTo(100 * directionMultiplier, 0, 200, Easing.SinOut);
-                    var fadeTask = label.FadeTo(0, 100, Easing.SinOut);
+                    var translateTask = contentView.TranslateTo(100 * directionMultiplier, 0, 200, Easing.SinOut);
+                    var fadeTask = contentView.FadeTo(0, 100, Easing.SinOut);
                     tasks.Add(Task.WhenAll(translateTask, fadeTask));
                 }
             }
@@ -133,12 +203,12 @@
             // Animate all day frames
             for (int i = 7; i < MonthsContainer.Children.Count; i++)
             {
-                if (MonthsContainer.Children[i] is Frame frame && frame.Content is Label label)
+                if (MonthsContainer.Children[i] is Border border && border.Content is ContentView contentView)
                 {
-                    label.TranslationX = 100 * directionMultiplier;
-                    label.Opacity = 0;
-                    var translateTask = label.TranslateTo(0, 0, 200, Easing.SinIn);
-                    var fadeTask = label.FadeTo(1, 200, Easing.SinIn);
+                    contentView.TranslationX = 100 * directionMultiplier;
+                    contentView.Opacity = 0;
+                    var translateTask = contentView.TranslateTo(0, 0, 200, Easing.SinIn);
+                    var fadeTask = contentView.FadeTo(1, 200, Easing.SinIn);
                     tasks.Add(Task.WhenAll(translateTask, fadeTask));
                 }
             }
@@ -152,20 +222,6 @@
         }
 
         private string GetMonthKey(DateTime date) => $"{date.Year}-{date.Month}";
-
-        private void OnLayoutSizeChanged(object sender, EventArgs e)
-        {
-            if (sender is VerticalStackLayout layout)
-            {
-                // Get the parent ScrollView
-                if (layout.Parent is ScrollView scrollView)
-                {
-                    // Set the minimum size to prevent shrinking
-                    layout.MinimumHeightRequest = layout.Height;
-                    layout.MinimumWidthRequest = layout.Width;
-                }
-            }
-        }
     }
 }
 

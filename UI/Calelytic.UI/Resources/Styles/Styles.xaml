@@ -16,7 +16,12 @@
     <Style x:Key="month-grid-border" TargetType="Border">
         <Setter Property="Stroke" Value="#e9ecef" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 15" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="5,15,0,15" />
+                <!--order of side by index: TopLeft, TopRight,BottomLeft,BottomRight-->
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Month label -->
@@ -41,7 +46,12 @@
     <Style x:Key="calendar-grid-border" TargetType="Border">
         <Setter Property="Stroke" Value="#e9ecef" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="0,0,15,15" />
+                <!--order of side by index: TopLeft, TopRight,BottomLeft,BottomRight-->
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Day Border -->
@@ -49,17 +59,35 @@
         <Setter Property="Stroke" Value="#e9ecef" />
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
-        <Setter Property="Stroke" Value="#e9ecef" />
-        <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
-    </Style>
-    <!-- Day frame -->
-    <Style x:Key="day" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#ffffff" />
-        <Setter Property="Margin" Value="2"/> <!--Direction Order by index: Left, Up, Right, Down -->
     </Style>
 
-        
+    <!-- Day frame -->
+    <Style x:Key="day" TargetType="ContentView">
+        <Setter Property="BackgroundColor" Value="#ffffff" />
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal" />
+                    <VisualState Name="Hover">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#f1f3f5" />
+                            <Setter Property="Scale" Value="1.02" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Day frame hover -->
+    <Style x:Key="day-hover" TargetType="ContentView">
+        <Setter Property="BackgroundColor" Value="#f1f3f5" />
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Scale" Value="1.02"/>
+    </Style>
 
     <!-- Day number label -->
     <Style x:Key="day-number" TargetType="Label">
@@ -67,21 +95,24 @@
         <Setter Property="TextColor" Value="#2b2d42" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalOptions" Value="Start" />
-        <Setter Property="Margin" Value="0,10,100,100" />
+        <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
 
+    <!-- Event label -->
     <Style x:Key="event-label" TargetType="Label">
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextColor" Value="#495057" />
+        <Setter Property="BackgroundColor" Value="#e9ecef"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="Margin" Value="4,0,4,4" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="MaxLines" Value="1" />
     </Style>
 
     <!-- Other month -->
-    <Style x:Key="other-month" TargetType="Border">
+    <Style x:Key="other-month" TargetType="Border" Class="other-month">
         <Setter Property="BackgroundColor" Value="#f1f3f5" />
         <Setter Property="Opacity" Value="0.7" />
         <Setter Property="Stroke" Value="#e9ecef" />
@@ -89,21 +120,25 @@
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
     </Style>
 
-    <Style x:Key="other-month-label" TargetType="Label">
+    <Style x:Key="other-month-label" TargetType="Label" Class="other-month-label">
         <Setter Property="TextColor" Value="#868e96" />
     </Style>
 
-    <!-- Today -->
-    <Style x:Key="today" TargetType="Border">
+    <!-- Today Border-->
+    <Style x:Key="today" TargetType="Border" Class="today">
         <Setter Property="BackgroundColor" Value="#e7f5ff" />
-        <Setter Property="Stroke" Value="#4dabf7" />
+        <Setter Property="Stroke" Value="#D06C0A" />
         <Setter Property="StrokeThickness" Value="2" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
     </Style>
-
-    <Style x:Key="today-label" TargetType="Label">
+    <!-- Today Label -->
+    <Style x:Key="today-label" TargetType="Label" Class="today-label">
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="#1971c2" />
+        <Setter Property="TextColor" Value="#D06C0A" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
 
     <!-- Calendar navigation buttons -->
@@ -132,6 +167,47 @@
         <Setter Property="Stroke" Value="#dee2e6" />
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+    </Style>
+
+    <!-- Day Button -->
+    <Style x:Key="dayButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#ffffff" />
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BorderColor" Value="#e9ecef"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="TextColor" Value="Transparent"/>
+    </Style>
+
+    <!-- Day Button Hover -->
+    <Style x:Key="dayButton-hover" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#f1f3f5" />
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BorderColor" Value="#e9ecef"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="TextColor" Value="Transparent"/>
+    </Style>
+
+    <!-- Other Month Button -->
+    <Style x:Key="other-month-button" TargetType="Button" Class="other-month">
+        <Setter Property="BackgroundColor" Value="#f1f3f5" />
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BorderColor" Value="#e9ecef"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="TextColor" Value="Transparent"/>
+    </Style>
+
+    <!-- Today Button -->
+    <Style x:Key="today-button" TargetType="Button" Class="today">
+        <Setter Property="BackgroundColor" Value="#e7f5ff" />
+        <Setter Property="BorderWidth" Value="2"/>
+        <Setter Property="BorderColor" Value="#D06C0A"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="TextColor" Value="Transparent"/>
     </Style>
 
 </ResourceDictionary>

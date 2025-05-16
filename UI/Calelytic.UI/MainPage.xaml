@@ -1,23 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calelytic.UI.MainPage">
+             x:Class="Calelytic.UI.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView">
+    
 
     <Grid ColumnDefinitions="0.175*,0.45*">
         <!-- Left quarter is empty as requested -->
         
         <!-- Calendar Section -->
-        <ScrollView Grid.Column="1" 
+        <ScrollView x:Name="MainScrollView"
+                    Grid.Column="1" 
                     Orientation="Both"
                     HorizontalScrollBarVisibility="Always"
-                    VerticalScrollBarVisibility="Always">
-            <VerticalStackLayout Spacing="20" Margin="0,0,20,0" SizeChanged="OnLayoutSizeChanged">
-                <!-- Header -->
-                <Border Style="{StaticResource month-grid-border}">
+                    VerticalScrollBarVisibility="Always"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+            <Grid RowDefinitions="Auto,*">
+            <!-- Header -->
+                <Border Grid.Row="0" Style="{StaticResource month-grid-border}">
                     <Grid Style="{StaticResource month-grid}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -28,21 +33,21 @@
 
                         <Label x:Name="CurrentMonthYear" 
                                Style="{StaticResource month-label}"
-                               Grid.Column="1"/>
+                               Grid.Column="2"/>
 
                         <Button x:Name="NextMonth" 
                                 Text="&gt;" 
                                 Style="{StaticResource CalendarNavButt}"
-                                Grid.Column="2"/>
+                                Grid.Column="1"/>
                     </Grid>
                 </Border>
 
                 <!-- Calendar Grid -->
-                <Border Style="{StaticResource calendar-grid-border}">
+                <Border Grid.Row="1" Style="{StaticResource calendar-grid-border}">
                     <Grid x:Name="MonthsContainer" 
                           Style="{StaticResource calendar-grid}"
-                          ColumnDefinitions="*,*,*,*,*,*,*"
-                          RowDefinitions="Auto,*,*,*,*,*,*">
+                          ColumnDefinitions="150,150,150,150,150,150,150"
+                          RowDefinitions="Auto,125,125,125,125,125,125">
                           
                         <!-- Weekday Headers -->
                         <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource weekday-border}">
@@ -70,8 +75,8 @@
                         <!-- Days will be dynamically added here -->
                     </Grid>
                 </Border>
-            </VerticalStackLayout>
-        </ScrollView>
+            </Grid>
+    </ScrollView>
     </Grid>
 
 </ContentPage>
